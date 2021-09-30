@@ -5,14 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: FastAPI",
+            "name": "Python: 当前文件",
             "type": "python",
             "request": "launch",
-            "module": "uvicorn",
-            "args": [
-                "main:app"
-            ],
-            "jinja": true
+            "program": "${file}",
+            "console": "integratedTerminal"
         }
     ]
 }
