@@ -19,7 +19,7 @@ y1 = torch.ones(sample_nums)
 
 train_x = torch.cat([x0, x1], 0)
 train_y = torch.cat([y0, y1], 0)
-
+# print('train_y shape:{}'.format(train_y.shape))
 
 # ============================ step 2/5 选择模型================================
 class LR(nn.Module):
@@ -49,6 +49,8 @@ optimizer = torch.optim.SGD(lr_net.parameters(), lr=lr, momentum=0.9)
 for iteration in range(1000):
     y_pred = lr_net(train_x)
     loss = loss_fn(y_pred.squeeze(), train_y)
+    # if iteration % 200 == 0:
+    #     print('y_pred shape:', y_pred.shape)
     loss.backward() # 反向传播
     optimizer.step() # 更新参数
     optimizer.zero_grad() # 清空梯度
@@ -67,7 +69,7 @@ for iteration in range(1000):
         plot_y = (-w0 * plot_x - plot_b) / w1
 
         plt.xlim(-5, 7)
-        plt.ylim(-7, 7)
+        plt.ylim(-5, 7)
         plt.plot(plot_x, plot_y)
         plt.text(-5, 5, 'Loss:%.4f'% loss.data.numpy(), fontdict={'size':20, 'color':'red'})
         plt.title('Iteration:{}\nw0:{}w1:{}b:{}accuracy:{}'.format(iteration, w0, w1, plot_b, accuracy))
